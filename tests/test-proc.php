@@ -17,7 +17,7 @@ $env = [
     'QUERY_STRING'    => '',
 ];
 
-$proc = proc_open($php_path, $spec, $pipes, getcwd(), $env);
+$proc = proc_open("{$php_path} -d display_errors=0", $spec, $pipes, getcwd(), $env);
 
 $ret    = 0;
 $stdout = '';

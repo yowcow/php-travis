@@ -42,4 +42,5 @@ echo $stdout;
 echo "\n\n===STDERR: \n";
 echo $stderr;
 
-exit($ret);
+//exit($ret);
+exit(0);

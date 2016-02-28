@@ -1,5 +1,7 @@
 <?php
 
+$php_path = shell_exec("which php-cgi");
+
 $spec = [
     0 => ['pipe', 'r'], // STDIN  for child process
     1 => ['pipe', 'w'], // STDOUT for child process
@@ -15,7 +17,7 @@ $env = [
     'QUERY_STRING'    => '',
 ];
 
-$proc = proc_open('php-cgi', $spec, $pipes, getcwd(), $env);
+$proc = proc_open($php_path, $spec, $pipes, getcwd(), $env);
 
 $ret    = 0;
 $stdout = '';
@@ -30,6 +32,8 @@ if (is_resource($proc)) {
 
     $stderr = stream_get_contents($pipes[2]);
     fclose($pipes[2]);
+
+    $ret = proc_close($proc);
 }
 
 echo "\n\n=== STDOUT:\n";
@@ -37,3 +41,5 @@ echo $stdout;
 
 echo "\n\n===STDERR: \n";
 echo $stderr;
+
+exit($ret);

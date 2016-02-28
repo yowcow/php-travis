@@ -7,3 +7,4 @@ php:
 
 script:
   - php-cgi -v
+  - php tests/test-proc.php
